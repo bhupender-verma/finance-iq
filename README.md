@@ -42,6 +42,16 @@ FinanceIQ is a dynamic, client-side personal finance management web application 
 
 ---
 
+## Setup & Configuration (Prerequisite)
+
+Before running the application, you must provide your own Firebase configuration keys.
+
+1. Open your terminal in the root folder of the project.
+2. Create your local config file by copying the example template:
+   ```bash
+   cp js/config.example.js js/config.js
+   ```
+
 ## How to Use / Run Locally
 
 Because this project uses ES6 JavaScript modules (`<script type="module">`) to import Firebase SDKs, it **cannot** be run by simply double-clicking the `index.html` file in your file explorer. It must be served over a local HTTP server.
