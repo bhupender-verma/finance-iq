@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login | FinanceIQ</title>
+    <link rel="icon" type="image/SVG" href="/static/favicon.svg" />
+    <link rel="stylesheet" href="../styles/cssauth.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="auth-container">
+      <!-- Left Side -->
+      <div class="auth-left">
+        <div class="auth-logo"><i class="fas fa-wallet"></i> FinanceIQ</div>
+        <h2>Welcome Back!</h2>
+        <p>Login to manage your finances smartly</p>
+
+        <div class="auth-features">
+          <div class="auth-feature">
+            <i class="fas fa-chart-pie"></i>
+            <span>Track Expenses</span>
+          </div>
+          <div class="auth-feature">
+            <i class="fas fa-wallet"></i>
+            <span>Manage Budget</span>
+          </div>
+          <div class="auth-feature">
+            <i class="fas fa-piggy-bank"></i>
+            <span>Save Money</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side -->
+      <div class="auth-right">
+        <div class="auth-card">
+          <h2>Login</h2>
+          <p class="auth-sub">Enter your credentials to continue</p>
+
+          <div class="form-group">
+            <label>Email</label>
+            <div class="input-icon">
+              <i class="fas fa-envelope"></i>
+              <input
+                type="email"
+                id="loginEmail"
+                placeholder="Enter your email"
+              />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Password</label>
+            <div class="pass-box">
+              <i class="fas fa-lock pass-left-icon"></i>
+              <input
+                type="password"
+                id="loginPassword"
+                placeholder="Enter your password"
+                class="pass-input"
+              />
+              <i class="fas fa-eye pass-eye-icon" id="toggleLoginPassword"></i>
+            </div>
+          </div>
+
+          <p id="loginError" class="error-msg"></p>
+
+          <button class="auth-btn" onclick="loginUser()">
+            Login <i class="fas fa-arrow-right"></i>
+          </button>
+
+          <p class="auth-switch">
+            Don't have an account?
+            <a href="../signup">Sign Up</a>
+          </p>
+
+          <a href="/" class="back-home">
+            <i class="fas fa-arrow-left"></i> Back to Home
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+      import {
+        getAuth,
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+      import {
+        getFirestore,
+        collection,
+        doc,
+        setDoc,
+        getDoc,
+        getDocs,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        query,
+        where,
+      } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+      // Import the config from your hidden file
+      import { firebaseConfig } from "../js/config.js";
+
+      const app = initializeApp(firebaseConfig);
+      const auth = getAuth(app);
+      const db = getFirestore(app);
+
+      // Make everything available globally for our other scripts
+      window.firebaseAuth = auth;
+      window.firebaseDB = db;
+      window.firebaseFns = {
+        createUserWithEmailAndPassword,
+        signInWithEmailAndPassword,
+        signOut,
+        onAuthStateChanged,
+        collection,
+        doc,
+        setDoc,
+        getDoc,
+        getDocs,
+        addDoc,
+        updateDoc,
+        deleteDoc,
+        query,
+        where,
+      };
+
+      // Signal that Firebase is ready
+      window.dispatchEvent(new Event("firebaseReady"));
+    </script>
+
+    <script src="../js/jsauth.js"></script>
+  </body>
+</html>
